@@ -1,0 +1,183 @@
+.profile-page-root {
+  min-height: 100vh;
+  font-family: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #fafafa;
+  color: #333333;
+  position: relative;
+}
+
+/* Fixed logo - independent positioning */
+.profile-logo-fixed {
+  position: fixed;
+  left: 60px;
+  top: 32px;
+  z-index: 1000;
+}
+
+.profile-logo {
+  height: 120px;
+  width: auto;
+  display: block;
+}
+
+/* Fixed navigation card - independent positioning */
+.profile-sidebar-fixed {
+  position: fixed;
+  left: 60px;
+  top: 296px; /* Logo top (32px) + logo height (144px) + spacing (120px) */
+  z-index: 999;
+}
+
+.profile-navigator-bg {
+  width: 80%;
+  height: auto;
+  display: block;
+}
+
+/* Scrollable content wrapper */
+.profile-content-wrapper {
+  padding: 32px 60px 48px 60px;
+  padding-top: 200px; /* Space for logo and navigation */
+}
+
+.profile-page-loading {
+  padding: 40px 80px;
+  font-family: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.profile-header-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.profile-tag-row {
+  display: inline-flex;
+  gap: 16px;
+}
+
+.profile-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 64px;
+  padding: 0 14px;
+  border-radius: 15px;
+  border: 1px solid #333;
+  background-color: #343434;
+  color: #fff;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.profile-tag-icon {
+  width: 42px;
+  height: 42px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.profile-header-name {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.profile-name {
+  font-family: "Ubuntu Mono", "Ubuntu Sans Mono", "Courier New", monospace;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 72px;
+  font-size: 96px;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1.9fr;
+  gap: 32px;
+  align-items: flex-end;
+  margin-left: 240px;
+  margin-top: 48px;
+}
+
+.profile-hero-left {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.profile-portrait-card {
+  background-color: transparent;
+}
+
+.profile-portrait-image {
+  display: block;
+  max-width: 360px;
+  height: auto;
+  transform: scaleX(-1);
+}
+
+.profile-hero-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card {
+  background-color: #EBEBEB;
+  border: 1.8px solid #343434;
+  border-radius: 16px;
+  padding: 32px 48px;
+  color: #343434;
+}
+
+.profile-card-bio {
+  background-color: transparent;
+  margin-bottom: 0;
+  margin-top: 48px;
+}
+
+.profile-card-title {
+  margin: 0 0 24px 0;
+  font-size: 32px;
+  font-weight: 600;
+  color: #343434;
+}
+
+.profile-card-body {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #343434;
+}
+
+.profile-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+  margin-left: 240px;
+  align-items: start;
+}
+
+.profile-list {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #343434;
+}
+
+.profile-footer-nav {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-next-button {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
