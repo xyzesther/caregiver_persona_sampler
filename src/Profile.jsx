@@ -6,6 +6,7 @@ import ageIcon from './assets/profile/age_icon.svg';
 import occupationIcon from './assets/profile/work_icon.svg';
 import relationshipIcon from './assets/profile/relationship_icon.svg';
 import navigatorBg from './assets/profile/navigator_bg.svg';
+import nextProfileBtn from './assets/profile/next_profile_btn.svg';
 import './Profile.css';
 
 const Profile = () => {
@@ -39,7 +40,7 @@ const Profile = () => {
 
   const profile = allData[currentIndex];
 
-  const age = profile.Age || '—';
+  const age = 'Age ' + profile.Age || 'Unknown';
   const relationship = profile['Relationship Categories'] || 'Caregiver';
   const occupations = profile['Occupations'] || 'Unknown';
   const bioText = profile.Bio || '';
@@ -190,7 +191,7 @@ const Profile = () => {
 
         <div className="profile-footer-nav">
           <button type="button" className="profile-next-button" onClick={handleNextProfile}>
-            Next Caregiver&apos;s Profile →
+            <img src={nextProfileBtn} alt="Next Caregiver's Profile" className="profile-next-button-image" />
           </button>
         </div>
       </div>

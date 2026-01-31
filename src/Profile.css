@@ -58,6 +58,7 @@
 
 .profile-tag-wrapper {
   position: relative;
+  display: inline-block;
 }
 
 .profile-tag {
@@ -77,8 +78,8 @@
   transition: all 0.3s ease;
   transform-origin: top right;
   position: relative;
-  width: auto;
-  min-width: fit-content;
+  width: fit-content;
+  max-width: fit-content;
 }
 
 .profile-tag-wrapper:hover .profile-tag {
@@ -100,7 +101,7 @@
   white-space: nowrap;
   opacity: 1;
   transition: opacity 0.3s ease, max-height 0.3s ease;
-  width: 100%;
+  flex-shrink: 0;
 }
 
 .profile-tag-wrapper:hover .profile-tag-main {
@@ -264,10 +265,14 @@
 }
 
 .profile-next-button {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid #333;
-  background-color: #fff;
+  padding: 0;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
-  font-size: 14px;
+}
+
+.profile-next-button-image {
+  display: block;
+  width: auto;
+  height: auto;
 }
