@@ -6,7 +6,7 @@
   position: relative;
 }
 
-/* Fixed logo - independent positioning */
+/* logo */
 .profile-logo-fixed {
   position: fixed;
   left: 60px;
@@ -20,11 +20,11 @@
   display: block;
 }
 
-/* Fixed navigation card - independent positioning */
+/* Fixed navigator */
 .profile-sidebar-fixed {
   position: fixed;
   left: 60px;
-  top: 296px; /* Logo top (32px) + logo height (144px) + spacing (120px) */
+  top: 296px;
   z-index: 999;
 }
 
@@ -37,7 +37,7 @@
 /* Scrollable content wrapper */
 .profile-content-wrapper {
   padding: 32px 60px 48px 60px;
-  padding-top: 200px; /* Space for logo and navigation */
+  padding-top: 140px;
 }
 
 .profile-page-loading {
@@ -96,7 +96,7 @@
   grid-template-columns: 1.1fr 1.9fr;
   gap: 32px;
   align-items: flex-end;
-  margin-left: 240px;
+  margin-left: 260px;
   margin-top: 48px;
 }
 
@@ -155,7 +155,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 32px;
-  margin-left: 240px;
+  margin-left: 290px;
   align-items: start;
 }
 
