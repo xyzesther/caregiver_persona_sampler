@@ -9,6 +9,7 @@ import disclaimerImage from './assets/profile/disclaimer.svg';
 import caretakingTimeImage from './assets/care_vs_work/caretaking_time.svg';
 import workHoursImage from './assets/care_vs_work/work_hours.svg';
 import timeRelationGraphImage from './assets/care_vs_work/time_relation_graph.svg';
+import financialMentalHealthImage from './assets/profile/financial_mental_health_chart.svg';
 import './Profile.css';
 
 // Import all age group images
@@ -488,9 +489,28 @@ const Profile = () => {
           {/* Financial Status and Mental Health section - placeholder */}
           <div id="profile-financial-mental-health" className="profile-financial-mental-health-distribution">
             <h3 className="profile-financial-mental-health-title">Financial Status and Mental Health</h3>
-            <div className="profile-financial-mental-health-placeholder">
-              <p>Content coming soon...</p>
+            <div className="profile-care-vs-work-text">
+              <div className="profile-care-vs-work-text-left">
+                <p className="profile-care-vs-work-paragraph">
+                  Financial stability is essential for caregivers. It is often the reason they continue to work paid jobs, even at the cost of time spent caregiving. 
+                </p>
+              </div>
+              <div className="profile-care-vs-work-text-right">
+                <p className="profile-care-vs-work-paragraph">
+                  According to the self-reported caregiver survey, the percentage of mental health concerns is significantly higher among those with unmet financial needs compared to those whose needs are met or who did not respond. This suggests a possible correlation between financial situation and mental health concerns.
+                </p>
+              </div>
             </div>
+            <div className="profile-care-vs-work-charts">
+              <img 
+                src={financialMentalHealthImage} 
+                alt="financial and mental health" 
+                className="profile-care-vs-work-image" 
+              />
+            </div>
+            <p className="profile-financial-mental-health-disclaimer">
+            *Please note that respondents were allowed to select multiple answers in the survey.
+            </p>
           </div>
         </div>
 

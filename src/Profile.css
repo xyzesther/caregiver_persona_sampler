@@ -574,9 +574,9 @@
 .profile-care-vs-work-correlation-disclaimer {
   margin: 0;
   font-family: Ubuntu;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 200;
   line-height: 20px;
 }
 
@@ -594,7 +594,7 @@
   image-rendering: auto;
 }
 
-/* Financial Status and Mental Health section - placeholder */
+/* Financial Status and Mental Health section */
 .profile-financial-mental-health-distribution {
   margin-top: 60px;
   border-radius: 25px;
@@ -612,9 +612,11 @@
   text-align: flex-start;
 }
 
-.profile-financial-mental-health-placeholder {
-  padding: 60px 20px;
-  text-align: center;
-  color: #999;
-  font-size: 18px;
+.profile-financial-mental-health-disclaimer {
+  margin-top: 72px;
+  font-family: Ubuntu;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 200;
+  line-height: 20px;
 }
