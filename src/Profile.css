@@ -9,7 +9,7 @@
 /* logo */
 .profile-logo-fixed {
   position: fixed;
-  left: 60px;
+  left: 40px;
   top: 32px;
   z-index: 1000;
 }
@@ -23,15 +23,107 @@
 /* Fixed navigator */
 .profile-sidebar-fixed {
   position: fixed;
-  left: 60px;
+  left: 30px;
   top: 296px;
   z-index: 999;
 }
 
+.profile-navigator-container {
+  position: relative;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
 .profile-navigator-bg {
-  width: 80%;
+  position: relative;
+  width: 240px;
   height: auto;
-  display: block;
+  background: var(--white, #FAFAFA);
+  border: 1.4px solid #000;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Left vertical line */
+.profile-navigator-bg::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80%;
+  width: 2px;
+  background: var(--grey, rgba(52, 52, 52, 0.50));
+  z-index: 1;
+}
+
+/* Navigation links */
+.profile-navigation-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Navigation group for grouped items */
+.profile-nav-group {
+  border-radius: 12px;
+  border: 1px solid #000;
+  padding: 12px 10px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 32px;
+  margin-right: 0;
+}
+
+.profile-nav-group .profile-nav-link {
+  margin-left: 12px;
+}
+
+.profile-nav-link {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 12px 0;
+  margin: 0;
+  margin-left: 32px;
+  font-family: "Ubuntu Sans Mono", "Ubuntu Mono", "Courier New", monospace;
+  font-size: 19.2px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #343434;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+  z-index: 1001;
+}
+
+.profile-nav-link:hover {
+  color: #FF9500;
+}
+
+/* Navigation indicator dot */
+.profile-navigation-indicator {
+  position: absolute;
+  left: 21px; /* Center aligned with vertical line (20px + 2px/2 = 21px) */
+  top: 0;
+  width: 9.6px;
+  height: 9.6px;
+  background-color: #FF9500;
+  border-radius: 50%;
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 1.6px rgba(255, 149, 0, 0.3);
 }
 
 /* Scrollable content wrapper */
@@ -64,7 +156,7 @@
 .profile-tag {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   min-height: 64px;
   padding: 0 14px;
@@ -80,6 +172,7 @@
   position: relative;
   width: fit-content;
   max-width: fit-content;
+  min-width: auto;
 }
 
 .profile-tag-wrapper:hover .profile-tag {
@@ -102,6 +195,8 @@
   opacity: 1;
   transition: opacity 0.3s ease, max-height 0.3s ease;
   flex-shrink: 0;
+  width: fit-content;
+  min-width: fit-content;
 }
 
 .profile-tag-wrapper:hover .profile-tag-main {
@@ -115,11 +210,15 @@
   opacity: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, opacity 0.3s ease;
+  width: 0;
+  min-width: 0;
 }
 
 .profile-tag-wrapper:hover .profile-tag-expanded {
   max-height: 500px;
   opacity: 1;
+  width: auto;
+  min-width: fit-content;
 }
 
 .profile-tag-icon {
@@ -493,4 +592,29 @@
   display: block;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: auto;
+}
+
+/* Financial Status and Mental Health section - placeholder */
+.profile-financial-mental-health-distribution {
+  margin-top: 60px;
+  border-radius: 25px;
+  border: 4px solid var(--grey, rgba(52, 52, 52, 0.50));
+  padding: 32px;
+}
+
+.profile-financial-mental-health-title {
+  margin: 0 0 72px 0;
+  font-family: Ubuntu;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: flex-start;
+}
+
+.profile-financial-mental-health-placeholder {
+  padding: 60px 20px;
+  text-align: center;
+  color: #999;
+  font-size: 18px;
 }

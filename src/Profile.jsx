@@ -4,7 +4,6 @@ import logoImage from './assets/profile/logo.svg';
 import ageIcon from './assets/profile/age_icon.svg';
 import occupationIcon from './assets/profile/work_icon.svg';
 import relationshipIcon from './assets/profile/relationship_icon.svg';
-import navigatorBg from './assets/profile/navigator_bg.svg';
 import nextProfileBtn from './assets/profile/next_profile_btn.svg';
 import disclaimerImage from './assets/profile/disclaimer.svg';
 import caretakingTimeImage from './assets/care_vs_work/caretaking_time.svg';
@@ -74,6 +73,7 @@ const Profile = () => {
   const [allData, setAllData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [dotOffset, setDotOffset] = useState(0);
 
   useEffect(() => {
     fetch('/data/selected_12_caregiver_profiles_0201.csv')
@@ -91,8 +91,86 @@ const Profile = () => {
       });
   }, []);
 
+  // Scroll tracking for navigation indicator
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        { id: 'profile-header', name: 'header' },
+        { id: 'profile-hero', name: 'hero' },
+        { id: 'profile-more-about-caregivers', name: 'more-about' },
+        { id: 'profile-age-groups', name: 'age-groups' },
+        { id: 'profile-care-vs-work', name: 'care-vs-work' },
+        { id: 'profile-financial-mental-health', name: 'financial-mental' },
+      ];
+
+      const scrollPosition = window.scrollY + 200;
+      let activeIndex = 0;
+
+      // Find active section
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i].id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementTop = rect.top + window.scrollY;
+          
+          if (scrollPosition >= elementTop - 100) {
+            activeIndex = i;
+            break;
+          }
+        }
+      }
+
+      // Calculate dot position based on active navigation link
+      const navLinks = document.querySelectorAll('.profile-nav-link');
+      if (navLinks[activeIndex]) {
+        const linkRect = navLinks[activeIndex].getBoundingClientRect();
+        const navContainer = document.querySelector('.profile-navigator-bg');
+        if (navContainer) {
+          const containerRect = navContainer.getBoundingClientRect();
+          const relativeTop = linkRect.top - containerRect.top + linkRect.height / 2;
+          setDotOffset(relativeTop);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial call
+    
+    // Also recalculate on resize
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
   const handleNextProfile = () => {
     setCurrentIndex((prev) => (prev + 1) % allData.length);
+  };
+
+  // Scroll to section function
+  const scrollToSection = (sectionId) => {
+    // Special case: scroll to top for header
+    if (sectionId === 'profile-header' || sectionId === 'profile-header-buttons') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 140; // Account for padding-top
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   if (loading || allData.length === 0) {
@@ -155,13 +233,57 @@ const Profile = () => {
 
       {/* Fixed navigation card - independent positioning */}
       <div className="profile-sidebar-fixed">
-        <img src={navigatorBg} alt="Navigation" className="profile-navigator-bg" />
+        <div className="profile-navigator-container">
+          <div className="profile-navigator-bg">
+            <div className="profile-navigation-links">
+              <button 
+                className="profile-nav-link" 
+                onClick={() => scrollToSection('profile-header')}
+              >
+                Caregiver's Bio
+              </button>
+              <button 
+                className="profile-nav-link" 
+                onClick={() => scrollToSection('profile-more-about-caregivers')}
+              >
+                More info about Caregivers:
+              </button>
+              <div className="profile-nav-group">
+                <button 
+                  className="profile-nav-link" 
+                  onClick={() => scrollToSection('profile-age-groups')}
+                >
+                  Age Groups
+                </button>
+                <button 
+                  className="profile-nav-link" 
+                  onClick={() => scrollToSection('profile-care-vs-work')}
+                >
+                  Working hours
+                </button>
+                <button 
+                  className="profile-nav-link" 
+                  onClick={() => scrollToSection('profile-financial-mental-health')}
+                >
+                  Financial & Mental Health
+                </button>
+              </div>
+            </div>
+            <div 
+              className="profile-navigation-indicator"
+              style={{ 
+                top: `${dotOffset}px`,
+                transform: `translateX(-50%) translateY(-50%)`
+              }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Scrollable content area */}
       <div className="profile-content-wrapper">
         {/* Buttons row */}
-        <div className="profile-header-buttons">
+        <div id="profile-header" className="profile-header-buttons">
           <div className="profile-tag-row">
             <div className="profile-tag-wrapper">
               <div className="profile-tag">
@@ -233,12 +355,12 @@ const Profile = () => {
         </div>
 
         {/* Name */}
-        <div className="profile-header-name">
+        <div id="profile-name" className="profile-header-name">
           <h1 className="profile-name">{profileName}</h1>
         </div>
 
         {/* Hero layout: illustration + bio */}
-        <div className="profile-hero">
+        <div id="profile-hero" className="profile-hero">
           <div className="profile-hero-left">
             <div className="profile-portrait-card">
               <img src={personaImage} alt={`${profileName} illustration`} className="profile-portrait-image" />
@@ -254,7 +376,7 @@ const Profile = () => {
         </div>
 
         {/* Behavior and Core Needs cards */}
-        <div className="profile-card-grid">
+        <div id="profile-behavior-core" className="profile-card-grid">
           <div className="profile-card">
             <h3 className="profile-card-title">Behavior</h3>
             <ul className="profile-list">
@@ -275,7 +397,7 @@ const Profile = () => {
         </div>
 
         {/* More About Caregivers module */}
-        <div className="profile-more-about-caregivers">
+        <div id="profile-more-about-caregivers" className="profile-more-about-caregivers">
           {/* Title and Disclaimer header row */}
           <div className="profile-more-about-header">
             <h2 className="profile-more-about-title">More About Caregivers</h2>
@@ -289,7 +411,7 @@ const Profile = () => {
           </div>
           
           {/* Age Group Distribution section */}
-          <div className="profile-age-group-distribution">
+          <div id="profile-age-groups" className="profile-age-group-distribution">
             <div className="profile-age-group-content">
               <div className="profile-age-group-chart">
                 <img 
@@ -313,7 +435,7 @@ const Profile = () => {
           </div>
 
           {/* Care taking hours VS Working hours section */}
-          <div className="profile-care-vs-work-distribution">
+          <div id="profile-care-vs-work" className="profile-care-vs-work-distribution">
             <h3 className="profile-care-vs-work-title">Care taking hours VS Working hours</h3>
             <div className="profile-care-vs-work-text">
               <div className="profile-care-vs-work-text-left">
@@ -360,6 +482,14 @@ const Profile = () => {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Financial Status and Mental Health section - placeholder */}
+          <div id="profile-financial-mental-health" className="profile-financial-mental-health-distribution">
+            <h3 className="profile-financial-mental-health-title">Financial Status and Mental Health</h3>
+            <div className="profile-financial-mental-health-placeholder">
+              <p>Content coming soon...</p>
             </div>
           </div>
         </div>
