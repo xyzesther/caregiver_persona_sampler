@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import agathaImage from './assets/personas/Agatha.svg';
 import logoImage from './assets/profile/logo.svg';
 import ageIcon from './assets/profile/age_icon.svg';
 import occupationIcon from './assets/profile/work_icon.svg';
@@ -9,20 +8,54 @@ import navigatorBg from './assets/profile/navigator_bg.svg';
 import nextProfileBtn from './assets/profile/next_profile_btn.svg';
 import './Profile.css';
 
+// Import all persona images
+import ashleyImage from './assets/personas/Ashley.svg';
+import barbaraImage from './assets/personas/Barbara.svg';
+import dorothyImage from './assets/personas/Dorothy.svg';
+import eleanorImage from './assets/personas/Eleanor.svg';
+import frankImage from './assets/personas/Frank.svg';
+import haroldImage from './assets/personas/Harold.svg';
+import helenImage from './assets/personas/Helen.svg';
+import jenniferImage from './assets/personas/Jennifer.svg';
+import lindaImage from './assets/personas/Linda.svg';
+import margaretImage from './assets/personas/Margaret.svg';
+import mariaImage from './assets/personas/Maria.svg';
+import michaelImage from './assets/personas/Michael.svg';
+import patriciaImage from './assets/personas/Patricia.svg';
+import robertImage from './assets/personas/Robert.svg';
+
+// Map names to images
+const personaImages = {
+  'Ashley': ashleyImage,
+  'Barbara': barbaraImage,
+  'Dorothy': dorothyImage,
+  'Eleanor': eleanorImage,
+  'Frank': frankImage,
+  'Harold': haroldImage,
+  'Helen': helenImage,
+  'Jennifer': jenniferImage,
+  'Linda': lindaImage,
+  'Margaret': margaretImage,
+  'Maria': mariaImage,
+  'Michael': michaelImage,
+  'Patricia': patriciaImage,
+  'Robert': robertImage,
+};
+
 const Profile = () => {
   const [allData, setAllData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/caregivers_samples.csv')
+    fetch('/data/selected_12_caregiver_profiles_0201.csv')
       .then((response) => response.text())
       .then((csvText) => {
         Papa.parse(csvText, {
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
-            const rows = results.data.filter((row) => row.Age);
+            const rows = results.data.filter((row) => row.Name && row.Profile_ID);
             setAllData(rows);
             setLoading(false);
           },
@@ -40,10 +73,14 @@ const Profile = () => {
 
   const profile = allData[currentIndex];
 
-  const age = 'Age ' + profile.Age || 'Unknown';
-  const relationship = profile['Relationship Categories'] || 'Caregiver';
-  const occupations = profile['Occupations'] || 'Unknown';
+  const age = profile['age_group'] || 'Unknown';
+  const relationship = profile['relationship'] || 'Caregiver';
+  const occupations = profile['occupation'] || 'Unknown';
   const bioText = profile.Bio || '';
+  const profileName = profile.Name || 'Unknown';
+  
+  // Get persona image based on name
+  const personaImage = personaImages[profileName] || mariaImage; // Default to Maria if not found
 
   const behaviorItems = [
     profile['Behavior 1'],
@@ -149,14 +186,14 @@ const Profile = () => {
 
         {/* Name */}
         <div className="profile-header-name">
-          <h1 className="profile-name">Agatha</h1>
+          <h1 className="profile-name">{profileName}</h1>
         </div>
 
         {/* Hero layout: illustration + bio */}
         <div className="profile-hero">
           <div className="profile-hero-left">
             <div className="profile-portrait-card">
-              <img src={agathaImage} alt="Caregiver illustration" className="profile-portrait-image" />
+              <img src={personaImage} alt={`${profileName} illustration`} className="profile-portrait-image" />
             </div>
           </div>
 
