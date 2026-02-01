@@ -7,6 +7,9 @@ import relationshipIcon from './assets/profile/relationship_icon.svg';
 import navigatorBg from './assets/profile/navigator_bg.svg';
 import nextProfileBtn from './assets/profile/next_profile_btn.svg';
 import disclaimerImage from './assets/profile/disclaimer.svg';
+import caretakingTimeImage from './assets/care_vs_work/caretaking_time.svg';
+import workHoursImage from './assets/care_vs_work/work_hours.svg';
+import timeRelationGraphImage from './assets/care_vs_work/time_relation_graph.svg';
 import './Profile.css';
 
 // Import all age group images
@@ -304,6 +307,57 @@ const Profile = () => {
                   <p className="profile-age-group-paragraph">
                     Understanding age differences helps reveal the diverse needs and pressures caregivers experience at different life stages, allowing for more tailored support systems and resources.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Care taking hours VS Working hours section */}
+          <div className="profile-care-vs-work-distribution">
+            <h3 className="profile-care-vs-work-title">Care taking hours VS Working hours</h3>
+            <div className="profile-care-vs-work-text">
+              <div className="profile-care-vs-work-text-left">
+                <p className="profile-care-vs-work-paragraph">
+                  Working time and caregiving time are both important to understand because they show how much pressure a caregiver might be under. If someone spends many hours at their job and also takes care of another person for a long part of the day, it can be very tiring and overwhelming.
+                </p>
+              </div>
+              <div className="profile-care-vs-work-text-right">
+                <p className="profile-care-vs-work-paragraph">
+                  They might not have enough time to rest, relax, or take care of their own needs. This can lead to stress or feeling burned out. Looking at how much time people spend working and caregiving helps us see what kind of support they might need, like more flexible schedules or help with caregiving tasks.
+                </p>
+              </div>
+            </div>
+            <div className="profile-care-vs-work-charts">
+              <img 
+                src={caretakingTimeImage} 
+                alt="Care taking hours" 
+                className="profile-care-vs-work-image" 
+              />
+              <img 
+                src={workHoursImage} 
+                alt="Working hours" 
+                className="profile-care-vs-work-image" 
+              />
+            </div>
+            
+            {/* Care taking hours VS Working hours correlation section */}
+            <div className="profile-care-vs-work-correlation">
+              <h3 className="profile-care-vs-work-correlation-title">Care taking hours VS Working hours correlation</h3>
+              <div className="profile-care-vs-work-correlation-content">
+                <div className="profile-care-vs-work-correlation-text">
+                  <p className="profile-care-vs-work-correlation-paragraph">
+                    According to the voluntary caregiver survey, each additional hour of paid work is associated with a 10-minute decrease in time spent on caregiving.
+                  </p>
+                  <p className="profile-care-vs-work-correlation-disclaimer">
+                    *Graph is not to scale
+                  </p>
+                </div>
+                <div className="profile-care-vs-work-correlation-graph">
+                  <img 
+                    src={timeRelationGraphImage} 
+                    alt="Care taking hours VS Working hours correlation" 
+                    className="profile-care-vs-work-correlation-image" 
+                  />
                 </div>
               </div>
             </div>
