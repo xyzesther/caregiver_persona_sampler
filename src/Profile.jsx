@@ -6,7 +6,32 @@ import occupationIcon from './assets/profile/work_icon.svg';
 import relationshipIcon from './assets/profile/relationship_icon.svg';
 import navigatorBg from './assets/profile/navigator_bg.svg';
 import nextProfileBtn from './assets/profile/next_profile_btn.svg';
+import disclaimerImage from './assets/profile/disclaimer.svg';
 import './Profile.css';
+
+// Import all age group images
+import ageGroup1 from './assets/age_groups/1.svg';
+import ageGroup2 from './assets/age_groups/2.svg';
+import ageGroup3 from './assets/age_groups/3.svg';
+import ageGroup4 from './assets/age_groups/4.svg';
+import ageGroup5 from './assets/age_groups/5.svg';
+import ageGroup6 from './assets/age_groups/6.svg';
+import ageGroup7 from './assets/age_groups/7.svg';
+import ageGroup8 from './assets/age_groups/8.svg';
+import ageGroup9 from './assets/age_groups/9.svg';
+
+// Map age group numbers to images
+const ageGroupImages = {
+  1: ageGroup1,
+  2: ageGroup2,
+  3: ageGroup3,
+  4: ageGroup4,
+  5: ageGroup5,
+  6: ageGroup6,
+  7: ageGroup7,
+  8: ageGroup8,
+  9: ageGroup9,
+};
 
 // Import all persona images
 import ashleyImage from './assets/personas/Ashley.svg';
@@ -97,6 +122,26 @@ const Profile = () => {
     profile['Core Needs 4'],
     profile['Core Needs 5'],
   ].filter((item) => item && String(item).trim().length > 0);
+
+  // Function to get age group image based on age_group text
+  // Extract the first digit from age_group (e.g., "18 - 19" -> 1, "30 - 39" -> 3, "90+" -> 9)
+  const getAgeGroupImage = (ageGroupText) => {
+    if (!ageGroupText) return ageGroup1; // Default to 1.svg
+    
+    // Extract first digit from the age group string
+    const match = ageGroupText.match(/^(\d+)/);
+    if (match) {
+      const firstNumber = parseInt(match[1], 10);
+      // Get the first digit (tens place)
+      const firstDigit = Math.floor(firstNumber / 10);
+      // Map to 1-9 range
+      const imageIndex = firstDigit || 1;
+      return ageGroupImages[imageIndex] || ageGroup1;
+    }
+    return ageGroup1; // Default fallback
+  };
+
+  const ageGroupDistributionImage = getAgeGroupImage(age);
 
   return (
     <div className="profile-page-root">
@@ -223,6 +268,45 @@ const Profile = () => {
                 <li key={idx}>{item}</li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* More About Caregivers module */}
+        <div className="profile-more-about-caregivers">
+          {/* Title and Disclaimer header row */}
+          <div className="profile-more-about-header">
+            <h2 className="profile-more-about-title">More About Caregivers</h2>
+            <div className="profile-disclaimer-wrapper">
+              <img 
+                src={disclaimerImage} 
+                alt="Disclaimer" 
+                className="profile-disclaimer-image" 
+              />
+            </div>
+          </div>
+          
+          {/* Age Group Distribution section */}
+          <div className="profile-age-group-distribution">
+            <div className="profile-age-group-content">
+              <div className="profile-age-group-chart">
+                <img 
+                  src={ageGroupDistributionImage} 
+                  alt="Age Group Distribution" 
+                  className="profile-age-group-image" 
+                />
+              </div>
+              <div className="profile-age-group-right">
+                <h3 className="profile-age-group-title">Age Groups</h3>
+                <div className="profile-age-group-text">
+                  <p className="profile-age-group-paragraph">
+                    Age is an important factor when studying caregivers because it influences their physical capacity, emotional resilience, financial stability, and social support networks. Younger caregivers may struggle with balancing caregiving duties alongside education or early career demands, while older caregivers might face their own health challenges or retirement-related stress.
+                  </p>
+                  <p className="profile-age-group-paragraph">
+                    Understanding age differences helps reveal the diverse needs and pressures caregivers experience at different life stages, allowing for more tailored support systems and resources.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
