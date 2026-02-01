@@ -148,6 +148,10 @@ const Profile = () => {
 
   const handleNextProfile = () => {
     setCurrentIndex((prev) => (prev + 1) % allData.length);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   // Scroll to section function
