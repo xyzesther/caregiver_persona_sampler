@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Papa from 'papaparse';
 import logoImage from './assets/profile/logo.svg';
 import ageIcon from './assets/profile/age_icon.svg';
 import occupationIcon from './assets/profile/work_icon.svg';
@@ -10,6 +9,10 @@ import timeRelationGraphImage from './assets/care_vs_work/time_relation_graph.sv
 import financialMentalHealthImage from './assets/profile/financial_mental_health_chart.svg';
 import CaretakingTimeChart from './components/CaretakingTimeChart';
 import WorkHoursChart from './components/WorkHoursChart';
+import ProfileSidebar from './components/ProfileSidebar';
+import ProfileTagRow from './components/ProfileTagRow';
+import ProfileIdentitySection from './components/ProfileIdentitySection';
+import { useCaregiverProfiles } from './hooks/useCaregiverProfiles';
 import './Profile.css';
 
 // Import all age group images
@@ -71,41 +74,24 @@ const personaImages = {
 };
 
 const Profile = () => {
-  const [allData, setAllData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
   const [dotOffset, setDotOffset] = useState(0);
-
-  useEffect(() => {
-    fetch('/data/selected_12_caregiver_profiles_0201.csv')
-      .then((response) => response.text())
-      .then((csvText) => {
-        Papa.parse(csvText, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (results) => {
-            const rows = results.data.filter((row) => row.Name && row.Profile_ID);
-            setAllData(rows);
-            setLoading(false);
-          },
-        });
-      });
-  }, []);
+  const { profiles: allData, loading } = useCaregiverProfiles();
 
   // Scroll tracking for navigation indicator
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
-        { id: 'profile-header', name: 'header' },
-        { id: 'profile-hero', name: 'hero' },
-        { id: 'profile-more-about-caregivers', name: 'more-about' },
-        { id: 'profile-age-groups', name: 'age-groups' },
-        { id: 'profile-care-vs-work', name: 'care-vs-work' },
-        { id: 'profile-financial-mental-health', name: 'financial-mental' },
+        { id: 'profile-header', navIndex: 0 },
+        { id: 'profile-hero', navIndex: 0 },
+        { id: 'profile-more-about-caregivers', navIndex: 1 },
+        { id: 'profile-age-groups', navIndex: 2 },
+        { id: 'profile-care-vs-work', navIndex: 3 },
+        { id: 'profile-financial-mental-health', navIndex: 4 },
       ];
 
       const scrollPosition = window.scrollY + 200;
-      let activeIndex = 0;
+      let activeNavIndex = 0;
 
       // Find active section
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -115,7 +101,7 @@ const Profile = () => {
           const elementTop = rect.top + window.scrollY;
           
           if (scrollPosition >= elementTop - 100) {
-            activeIndex = i;
+            activeNavIndex = sections[i].navIndex;
             break;
           }
         }
@@ -123,8 +109,8 @@ const Profile = () => {
 
       // Calculate dot position based on active navigation link
       const navLinks = document.querySelectorAll('.profile-nav-link');
-      if (navLinks[activeIndex]) {
-        const linkRect = navLinks[activeIndex].getBoundingClientRect();
+      if (navLinks[activeNavIndex]) {
+        const linkRect = navLinks[activeNavIndex].getBoundingClientRect();
         const navContainer = document.querySelector('.profile-navigator-bg');
         if (navContainer) {
           const containerRect = navContainer.getBoundingClientRect();
@@ -233,175 +219,26 @@ const Profile = () => {
 
   return (
     <div className="profile-page-root">
-      {/* Fixed logo - independent positioning */}
-      <div className="profile-logo-fixed">
-        <img src={logoImage} alt="Caregiver Persona Sampler logo" className="profile-logo" />
-      </div>
-
-      {/* Fixed navigation card - independent positioning */}
-      <div className="profile-sidebar-fixed">
-        <div className="profile-navigator-container">
-          <div className="profile-navigator-bg">
-            <div className="profile-navigation-links">
-              <button 
-                className="profile-nav-link" 
-                onClick={() => scrollToSection('profile-header')}
-              >
-                Caregiver's Bio
-              </button>
-              <button 
-                className="profile-nav-link" 
-                onClick={() => scrollToSection('profile-more-about-caregivers')}
-              >
-                More info about Caregivers:
-              </button>
-              <div className="profile-nav-group">
-                <button 
-                  className="profile-nav-link" 
-                  onClick={() => scrollToSection('profile-age-groups')}
-                >
-                  Age Groups
-                </button>
-                <button 
-                  className="profile-nav-link" 
-                  onClick={() => scrollToSection('profile-care-vs-work')}
-                >
-                  Working hours
-                </button>
-                <button 
-                  className="profile-nav-link" 
-                  onClick={() => scrollToSection('profile-financial-mental-health')}
-                >
-                  Financial & Mental Health
-                </button>
-              </div>
-            </div>
-            <div 
-              className="profile-navigation-indicator"
-              style={{ 
-                top: `${dotOffset}px`,
-                transform: `translateX(-50%) translateY(-50%)`
-              }}
-            />
-          </div>
-        </div>
-      </div>
+      <ProfileSidebar logoImage={logoImage} dotOffset={dotOffset} scrollToSection={scrollToSection} />
 
       {/* Scrollable content area */}
       <div className="profile-content-wrapper">
-        {/* Buttons row */}
-        <div id="profile-header" className="profile-header-buttons">
-          <div className="profile-tag-row">
-            <div className="profile-tag-wrapper">
-              <div className="profile-tag">
-                <div className="profile-tag-main">
-                  {age}
-                  <img src={ageIcon} alt="Age" className="profile-tag-icon" />
-                </div>
-                <div className="profile-tag-expanded">
-                  <div className="profile-tag-header">
-                    <span className="profile-tag-title">Age Groups</span>
-                    <img src={ageIcon} alt="Age" className="profile-tag-header-icon" />
-                  </div>
-                  <ul className="profile-tag-list">
-                    <li>Age 18 - 19</li>
-                    <li>Age 20 - 29</li>
-                    <li>Age 30 - 39</li>
-                    <li>Age 40 - 49</li>
-                    <li>Age 50 - 59</li>
-                    <li>Age 60 - 69</li>
-                    <li>Age 70 - 79</li>
-                    <li>Age 80 - 89</li>
-                    <li>Age 90+</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="profile-tag-wrapper">
-              <div className="profile-tag">
-                <div className="profile-tag-main">
-                  {occupations}
-                  <img src={occupationIcon} alt="Work" className="profile-tag-icon" />
-                </div>
-                <div className="profile-tag-expanded">
-                  <div className="profile-tag-header">
-                    <span className="profile-tag-title">Occupations</span>
-                    <img src={occupationIcon} alt="Work" className="profile-tag-header-icon" />
-                  </div>
-                  <ul className="profile-tag-list">
-                    <li>Unemployed</li>
-                    <li>Part-time Employed</li>
-                    <li>Full-time Employed</li>
-                    <li>Retired</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="profile-tag-wrapper">
-              <div className="profile-tag">
-                <div className="profile-tag-main">
-                  {relationship}
-                  <img src={relationshipIcon} alt="Relationship" className="profile-tag-icon" />
-                </div>
-                <div className="profile-tag-expanded">
-                  <div className="profile-tag-header">
-                    <span className="profile-tag-title">Relationship Categories</span>
-                    <img src={relationshipIcon} alt="Relationship" className="profile-tag-header-icon" />
-                  </div>
-                  <ul className="profile-tag-list">
-                    <li>Parent</li>
-                    <li>Spouse/Partner</li>
-                    <li>Other family member</li>
-                    <li>Friend/Neighbor</li>
-                    <li>Other</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProfileTagRow
+          age={age}
+          occupations={occupations}
+          relationship={relationship}
+          ageIcon={ageIcon}
+          occupationIcon={occupationIcon}
+          relationshipIcon={relationshipIcon}
+        />
 
-        {/* Name */}
-        <div id="profile-name" className="profile-header-name">
-          <h1 className="profile-name">{profileName}</h1>
-        </div>
-
-        {/* Hero layout: illustration + bio */}
-        <div id="profile-hero" className="profile-hero">
-          <div className="profile-hero-left">
-            <div className="profile-portrait-card">
-              <img src={personaImage} alt={`${profileName} illustration`} className="profile-portrait-image" />
-            </div>
-          </div>
-
-          <div className="profile-hero-right">
-            <div className="profile-card profile-card-bio">
-              <h2 className="profile-card-title">Bio</h2>
-              <p className="profile-card-body">{bioText}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Behavior and Core Needs cards */}
-        <div id="profile-behavior-core" className="profile-card-grid">
-          <div className="profile-card">
-            <h3 className="profile-card-title">Behavior</h3>
-            <ul className="profile-list">
-              {behaviorItems.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="profile-card">
-            <h3 className="profile-card-title">Core Needs</h3>
-            <ul className="profile-list">
-              {coreNeeds.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <ProfileIdentitySection
+          profileName={profileName}
+          personaImage={personaImage}
+          bioText={bioText}
+          behaviorItems={behaviorItems}
+          coreNeeds={coreNeeds}
+        />
 
         {/* More About Caregivers module */}
         <div id="profile-more-about-caregivers" className="profile-more-about-caregivers">
