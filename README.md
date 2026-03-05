@@ -1,16 +1,49 @@
-# React + Vite
+# Caregiver Persona Sampler
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What this website is for
 
-Currently, two official plugins are available:
+Caregiver Persona Sampler helps teams design better products and services for caregivers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Instead of relying on fully fictional personas, the website presents caregiver profiles grounded in real survey patterns. You can explore individual caregiver stories and quickly understand the context behind their daily decisions, including:
 
-## React Compiler
+- caregiving responsibilities
+- work-life pressure
+- age-group context
+- financial and mental-health-related signals
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This makes it easier to build with empathy and base early product decisions on realistic user situations.
 
-## Expanding the ESLint configuration
+## What you can do on the site
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Browse caregiver personas one by one.
+- Read each persona's bio, behaviors, and core needs.
+- Compare caregiving hours and paid work hours.
+- View supporting context sections (age groups, care vs. work, and wellbeing-related insights).
+
+## Intended users
+
+- UX/UI designers
+- Product managers
+- Researchers
+- Students and teams working on caregiver-focused concepts
+
+## For developers
+
+### Quick start
+
+```bash
+npm install
+npm run dev
+```
+
+### Build commands
+
+- `npm run build` - create production build
+- `npm run preview` - preview production build locally
+- `npm run lint` - run ESLint
+
+### Data note
+
+`src/Profile.jsx` fetches data in `public/data`.
+
+You can update the data source in `public/data/` or update the fetch path in `src/Profile.jsx` accordingly.
