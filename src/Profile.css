@@ -532,6 +532,132 @@
   image-rendering: auto;
 }
 
+.profile-caretaking-time-chart {
+  width: min(100%, 82vw);
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.profile-caretaking-time-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caretaking-time-axis-label {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.caretaking-time-axis-title,
+.caretaking-time-y-axis-title {
+  fill: #343434;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.caretaking-time-top-label {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.caretaking-time-legend-label {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.caretaking-time-legend-label-compact {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.caretaking-time-bar,
+.caretaking-time-bar-legend {
+  stroke: #969696;
+  stroke-width: 14;
+  stroke-linecap: butt;
+}
+
+.caretaking-time-profile-marker {
+  stroke: #4a4a4a;
+  stroke-width: 4;
+}
+
+.caretaking-time-median-marker {
+  stroke: #ff9500;
+  stroke-width: 4;
+  stroke-dasharray: 8 6;
+}
+
+.profile-work-hours-chart {
+  width: min(100%, 82vw);
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.profile-work-hours-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.work-hours-axis-label {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.work-hours-axis-title,
+.work-hours-y-axis-title {
+  fill: #343434;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.work-hours-top-label {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.work-hours-legend-label,
+.work-hours-legend-label-compact {
+  fill: #343434;
+  font-family: "Open Sans", "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.work-hours-bar,
+.work-hours-bar-legend {
+  stroke: #969696;
+  stroke-width: 14;
+  stroke-linecap: butt;
+}
+
+.work-hours-profile-marker {
+  stroke: #4a4a4a;
+  stroke-width: 4;
+}
+
+.work-hours-median-marker {
+  stroke: #ff9500;
+  stroke-width: 4;
+  stroke-dasharray: 8 6;
+}
+
 /* Care taking hours VS Working hours correlation section */
 .profile-care-vs-work-correlation {
   margin-top: 72px;

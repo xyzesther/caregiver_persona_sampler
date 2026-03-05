@@ -6,10 +6,10 @@ import occupationIcon from './assets/profile/work_icon.svg';
 import relationshipIcon from './assets/profile/relationship_icon.svg';
 import nextProfileBtn from './assets/profile/next_profile_btn.svg';
 import disclaimerImage from './assets/profile/disclaimer.svg';
-import caretakingTimeImage from './assets/care_vs_work/caretaking_time.svg';
-import workHoursImage from './assets/care_vs_work/work_hours.svg';
 import timeRelationGraphImage from './assets/care_vs_work/time_relation_graph.svg';
 import financialMentalHealthImage from './assets/profile/financial_mental_health_chart.svg';
+import CaretakingTimeChart from './components/CaretakingTimeChart';
+import WorkHoursChart from './components/WorkHoursChart';
 import './Profile.css';
 
 // Import all age group images
@@ -228,6 +228,8 @@ const Profile = () => {
   };
 
   const ageGroupDistributionImage = getAgeGroupImage(age);
+  const caregivingHours = Number.parseFloat(profile['hours spent for care_weekly']) || 0;
+  const workHours = Number.parseFloat(profile.work_hours) || 0;
 
   return (
     <div className="profile-page-root">
@@ -455,16 +457,8 @@ const Profile = () => {
               </div>
             </div>
             <div className="profile-care-vs-work-charts">
-              <img 
-                src={caretakingTimeImage} 
-                alt="Care taking hours" 
-                className="profile-care-vs-work-image" 
-              />
-              <img 
-                src={workHoursImage} 
-                alt="Working hours" 
-                className="profile-care-vs-work-image" 
-              />
+              <CaretakingTimeChart profileHours={caregivingHours} />
+              <WorkHoursChart profileHours={workHours} />
             </div>
             
             {/* Care taking hours VS Working hours correlation section */}
