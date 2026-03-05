@@ -91,7 +91,7 @@ const CaretakingTimeChart = ({ profileHours = 0 }) => {
     <div className="profile-caretaking-time-chart" role="img" aria-label="Caretaking time distribution chart">
       <svg
         className="profile-caretaking-time-chart-svg"
-        viewBox="0 -30 930 560"
+        viewBox="0 -30 880 560"
         preserveAspectRatio="xMidYMid meet"
       >
         {/* y-axis labels */}

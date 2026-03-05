@@ -96,7 +96,7 @@ const WorkHoursChart = ({ profileHours = 0 }) => {
 
   return (
     <div className="profile-work-hours-chart" role="img" aria-label="Job hours distribution chart">
-      <svg className="profile-work-hours-chart-svg" viewBox="0 -30 930 560" preserveAspectRatio="xMidYMid meet">
+      <svg className="profile-work-hours-chart-svg" viewBox="0 -30 880 560" preserveAspectRatio="xMidYMid meet">
         {[200, 175, 150, 125, 100, 75, 50, 25, 0].map((tick) => (
           <text key={tick} x="44" y={yFromFrequency(tick) + 6} className="work-hours-axis-label">
             {tick}

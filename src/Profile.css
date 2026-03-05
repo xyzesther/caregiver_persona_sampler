@@ -533,8 +533,8 @@
 }
 
 .profile-caretaking-time-chart {
-  width: min(100%, 82vw);
-  max-width: 1380px;
+  width: min(100%, 88vw);
+  max-width: 1480px;
   margin: 0 auto;
 }
 
@@ -599,8 +599,8 @@
 }
 
 .profile-work-hours-chart {
-  width: min(100%, 82vw);
-  max-width: 1380px;
+  width: min(100%, 88vw);
+  max-width: 1480px;
   margin: 0 auto;
 }
 
@@ -636,7 +636,7 @@
 .work-hours-legend-label-compact {
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
 }
 
