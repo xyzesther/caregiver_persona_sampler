@@ -548,7 +548,7 @@
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .caretaking-time-axis-title,
@@ -556,28 +556,28 @@
   fill: #343434;
   font-family: "Ubuntu", sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .caretaking-time-top-label {
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .caretaking-time-legend-label {
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .caretaking-time-legend-label-compact {
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .caretaking-time-bar,
@@ -614,7 +614,7 @@
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .work-hours-axis-title,
@@ -622,14 +622,14 @@
   fill: #343434;
   font-family: "Ubuntu", sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .work-hours-top-label {
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .work-hours-legend-label,
@@ -637,7 +637,7 @@
   fill: #343434;
   font-family: "Open Sans", "Ubuntu", sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 .work-hours-bar,

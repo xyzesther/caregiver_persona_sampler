@@ -64,7 +64,7 @@ const WorkHoursChart = ({ profileHours = 0 }) => {
   let medianLabelX = medianX + 10;
 
   if (!labelsOverlap) {
-    const profileIsLeft = profileLabelX <= medianLabelX;
+    const profileIsLeft = profileX <= medianX;
     const left = profileIsLeft ? profileLabelX : medianLabelX;
     const right = profileIsLeft ? medianLabelX : profileLabelX;
     const currentGap = right - left;
