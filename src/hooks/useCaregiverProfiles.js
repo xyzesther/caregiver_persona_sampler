@@ -5,12 +5,17 @@ export function useCaregiverProfiles(dataPath = CAREGIVER_PROFILES_PATH) {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [prevDataPath, setPrevDataPath] = useState(dataPath);
+
+  if (prevDataPath !== dataPath) {
+    setPrevDataPath(dataPath);
+    setProfiles([]);
+    setLoading(true);
+    setError(null);
+  }
 
   useEffect(() => {
     let isActive = true;
-
-    setLoading(true);
-    setError(null);
 
     fetchCaregiverProfiles(dataPath)
       .then((rows) => {
