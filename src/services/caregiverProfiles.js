@@ -1,9 +1,9 @@
 import Papa from 'papaparse';
 
-export const CAREGIVER_PROFILES_PATH = '/data/selected_12_caregiver_profiles_0201.csv';
+export const CAREGIVER_PROFILES_PATH = '/data/caregiver_profiles_cleaned.csv';
 
 export function isValidCaregiverProfile(row) {
-  return Boolean(row?.Name && row?.Profile_ID);
+  return Boolean(row?.Name && row?.Age_Group);
 }
 
 export async function fetchCaregiverProfiles(path = CAREGIVER_PROFILES_PATH) {
@@ -16,7 +16,12 @@ export async function fetchCaregiverProfiles(path = CAREGIVER_PROFILES_PATH) {
       skipEmptyLines: true,
       complete: (results) => {
         const rows = Array.isArray(results.data) ? results.data : [];
-        resolve(rows.filter(isValidCaregiverProfile));
+        const normalizedRows = rows.map((row) =>
+          Object.fromEntries(
+            Object.entries(row).map(([key, value]) => [key.trim(), value])
+          )
+        );
+        resolve(normalizedRows.filter(isValidCaregiverProfile));
       },
       error: (error) => reject(error),
     });

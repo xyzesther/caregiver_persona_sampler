@@ -13,6 +13,12 @@ import ProfileSidebar from './components/ProfileSidebar';
 import ProfileTagRow from './components/ProfileTagRow';
 import ProfileIdentitySection from './components/ProfileIdentitySection';
 import { useCaregiverProfiles } from './hooks/useCaregiverProfiles';
+import {
+  generateBio,
+  generateBehaviorBullets,
+  generateCoreNeedsBullets,
+  getProfileAvatarUrl,
+} from './services/profileContent';
 import './Profile.css';
 
 // Import all age group images
@@ -37,40 +43,6 @@ const ageGroupImages = {
   7: ageGroup7,
   8: ageGroup8,
   9: ageGroup9,
-};
-
-// Import all persona images
-import ashleyImage from './assets/personas/Ashley.svg';
-import barbaraImage from './assets/personas/Barbara.svg';
-import dorothyImage from './assets/personas/Dorothy.svg';
-import eleanorImage from './assets/personas/Eleanor.svg';
-import frankImage from './assets/personas/Frank.svg';
-import haroldImage from './assets/personas/Harold.svg';
-import helenImage from './assets/personas/Helen.svg';
-import jenniferImage from './assets/personas/Jennifer.svg';
-import lindaImage from './assets/personas/Linda.svg';
-import margaretImage from './assets/personas/Margaret.svg';
-import mariaImage from './assets/personas/Maria.svg';
-import michaelImage from './assets/personas/Michael.svg';
-import patriciaImage from './assets/personas/Patricia.svg';
-import robertImage from './assets/personas/Robert.svg';
-
-// Map names to images
-const personaImages = {
-  'Ashley': ashleyImage,
-  'Barbara': barbaraImage,
-  'Dorothy': dorothyImage,
-  'Eleanor': eleanorImage,
-  'Frank': frankImage,
-  'Harold': haroldImage,
-  'Helen': helenImage,
-  'Jennifer': jenniferImage,
-  'Linda': lindaImage,
-  'Margaret': margaretImage,
-  'Maria': mariaImage,
-  'Michael': michaelImage,
-  'Patricia': patriciaImage,
-  'Robert': robertImage,
 };
 
 const Profile = () => {
@@ -170,30 +142,15 @@ const Profile = () => {
 
   const profile = allData[currentIndex];
 
-  const age = profile['age_group'] || 'Unknown';
-  const relationship = profile['relationship'] || 'Caregiver';
-  const occupations = profile['occupation'] || 'Unknown';
-  const bioText = profile.Bio || '';
+  const age = profile.Age_Group || 'Unknown';
+  const relationship = profile['relationship to the person you care for'] || 'Caregiver';
+  const occupations = profile.Occupation_Category || 'Unknown';
   const profileName = profile.Name || 'Unknown';
-  
-  // Get persona image based on name
-  const personaImage = personaImages[profileName] || mariaImage; // Default to Maria if not found
+  const bioText = generateBio(profile);
+  const behaviorItems = generateBehaviorBullets(profile);
+  const coreNeeds = generateCoreNeedsBullets(profile);
 
-  const behaviorItems = [
-    profile['Behavior 1'],
-    profile['Behavior 2'],
-    profile['Behavior 3'],
-    profile['Behavior 4'],
-    profile['Behavior 5'],
-  ].filter((item) => item && String(item).trim().length > 0);
-
-  const coreNeeds = [
-    profile['Core Needs 1'],
-    profile['Core Needs 2'],
-    profile['Core Needs 3'],
-    profile['Core Needs 4'],
-    profile['Core Needs 5'],
-  ].filter((item) => item && String(item).trim().length > 0);
+  const personaImage = getProfileAvatarUrl(profile);
 
   // Function to get age group image based on age_group text
   // Extract the first digit from age_group (e.g., "18 - 19" -> 1, "30 - 39" -> 3, "90+" -> 9)
@@ -215,7 +172,7 @@ const Profile = () => {
 
   const ageGroupDistributionImage = getAgeGroupImage(age);
   const caregivingHours = Number.parseFloat(profile['hours spent for care_weekly']) || 0;
-  const workHours = Number.parseFloat(profile.work_hours) || 0;
+  const workHours = Number.parseFloat(profile['hours works at job']) || 0;
 
   return (
     <div className="profile-page-root">
